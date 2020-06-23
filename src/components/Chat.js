@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import SocketIoClient from 'socket.io-client'
+import io from 'socket.io-client'
 
 
 function Chat() {
 
+  const [message, setMessage] = useState('')
+
   useEffect(() => {
 
-    const socket = SocketIoClient("/"); 
-
+    const socket = io(); 
 
   }, [])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('submitted')
+  }
 
   return (
     <div>
@@ -17,8 +23,16 @@ function Chat() {
         
       </ul>
 
-      <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
+      <form onSubmit={((e) => (handleSubmit))}>
+        <input 
+          value={message}
+          onChange={((e) => setMessage(e.target.value))}
+          id="m" 
+          autoComplete="off" 
+        
+        />
+        
+        <button>Send</button>
       </form>
     </div>
   )
