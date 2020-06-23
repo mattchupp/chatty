@@ -10,9 +10,14 @@ app.get('/', (req, res) => {
 // set up chat connection
 io.on('connection', (socket) => {
   console.log('User connected'); 
-  // const name = prompt('What is your name?'); 
-  const name = "User"
+  const name = "User"; 
   io.emit('chat message', `${name} connected`); 
+
+  // socket.on('connect', () => {
+  //   // const name = prompt('What is your name?'); 
+  //   const name = "User"; 
+  //   io.emit('chat message', `${name} connected`); 
+  // })
 
   // do this one chat message
   socket.on('chat message', (msg) => {
